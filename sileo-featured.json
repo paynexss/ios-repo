@@ -21,6 +21,10 @@
               "accessibilityText": "appdecrypt"
             },
             {
+              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.repo-key.png",
+              "accessibilityText": "源签名公钥"
+            },
+            {
               "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.tweak.egernprounlock.png",
               "accessibilityText": "EgernProUnlock"
             },
@@ -32,7 +36,7 @@
         },
         {
           "class": "DepictionMarkdownView",
-          "markdown": "## paynexss's repo\n\n共 4 个包"
+          "markdown": "## paynexss's repo\n\n共 5 个包"
         }
       ]
     }

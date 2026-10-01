@@ -13,7 +13,7 @@
 | `com.paynexc.appdecrypt` | 1.0.0 | 设备端砸壳 CLI（`task_for_pid` + 内存解密，无需 frida） |
 | `com.paynexc.tweak.egernprounlock` | 2.5.0 | 解锁 Egern Pro（自包含 hook 层，不依赖 CydiaSubstrate） |
 | `com.paynexc.tweak.sjjunlock` | 1.0.1-2+debug | 绕过抖音优化 siwenjiajia 授权（调试版） |
-| `com.harans.tweak.shortcuttodebug` | 0.2.0 | 无根越狱下用 3D Touch 快捷方式打开设置的「调试」页 |
+| `com.harans.tweak.shortcuttodebug` | 0.2.0-7+debug | 无根越狱下用 3D Touch 快捷方式打开设置的「调试」页 |
 | `com.paynexc.repo-key` | 1.0.0 | 本源签名公钥（引导用，只需装一次） |
 
 ## 签名与公钥

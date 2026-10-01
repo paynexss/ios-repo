@@ -1,6 +1,6 @@
 Package: com.harans.tweak.shortcuttodebug
 Name: Tap2DebugRootless
-Version: 0.2.0
+Version: 0.2.0-7+debug
 Architecture: iphoneos-arm64
 Description: 无根越狱下通过 3D Touch 快捷方式打开设置中的“调试”页面
 Maintainer: Harlans
@@ -11,12 +11,12 @@ SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.harans.tweak.short
 Homepage: https://github.com/paynexss
 Icon: https://paynexss.github.io/ios-repo/icons/com.harans.tweak.shortcuttodebug.png
 Tag: purpose::extension
-Installed-Size: 2252
-Filename: ./debs/com.harans.tweak.shortcuttodebug_0.2.0_iphoneos-arm64.deb
-Size: 567496
-MD5sum: 306c0275c91aa9d535207ec323530f1e
-SHA1: 84ac8e889c8ba89e10bf8951925d7812f20ae714
-SHA256: f4b208c5d35679075b95bd268e080bc16c8d05769d57ed5e21e1a53349860dd4
+Installed-Size: 404
+Filename: ./debs/com.harans.tweak.shortcuttodebug_0.2.0-7+debug_iphoneos-arm64.deb
+Size: 29406
+MD5sum: e4c6b4bce08867b2664fb4fda7dc189d
+SHA1: 15a6adb6392b59b82e5349435094319b980a2992
+SHA256: 6f80913b0c43530c41b6ede52b84951584ef2ab39eb7a4fba305092c82096de6
 
 Package: com.paynexc.appdecrypt
 Name: appdecrypt
@@ -37,6 +37,26 @@ Size: 348382
 MD5sum: 77af1b17beab45a75ced201425a19964
 SHA1: e3c3bb5ceb8f7cd02d90d939340ffefdd90ad7e9
 SHA256: b637bde4dd812375a7156e809813acfa58def54e221cc64bae0b06854f618923
+
+Package: com.paynexc.repo-key
+Name: 源签名公钥
+Version: 1.0.0
+Architecture: iphoneos-arm64
+Description: 自建源（GitHub Pages）的 APT 签名公钥
+Maintainer: paynexc
+Author: paynexc
+Section: Packaging
+Depends: firmware (>= 15.0)
+SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.paynexc.repo-key.json
+Homepage: https://github.com/paynexss
+Icon: https://paynexss.github.io/ios-repo/icons/com.paynexc.repo-key.png
+Tag: purpose::extension
+Installed-Size: 0
+Filename: ./debs/com.paynexc.repo-key_1.0.0_iphoneos-arm64.deb
+Size: 3750
+MD5sum: a133f5948cf46c309d53458754118e18
+SHA1: ec85f16ba6b283001144a4485dc88db2bb27b7c3
+SHA256: 40c175feb6bc81d4666dc188207bbde3927cf8a204f5597c1e483493d754c5ac
 
 Package: com.paynexc.tweak.egernprounlock
 Name: EgernProUnlock

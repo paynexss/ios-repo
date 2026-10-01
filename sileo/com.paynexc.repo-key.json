@@ -1,7 +1,7 @@
 {
   "class": "DepictionTabView",
   "minVersion": "0.4",
-  "tintColor": "#FF9F0A",
+  "tintColor": "#BF5AF2",
   "tabs": [
     {
       "class": "DepictionStackView",
@@ -9,7 +9,7 @@
       "views": [
         {
           "class": "DepictionMarkdownView",
-          "markdown": "# Tap2DebugRootless\n\n无根越狱下通过 3D Touch 快捷方式打开设置中的“调试”页面\n\n**版本** 0.2.0-7+debug ｜ **架构** iphoneos-arm64 ｜ **分类** Tweaks\n\n**依赖**：`mobilesubstrate (>= 0.9.5000)`\n\n---\n\n来自 paynexss's repo。源地址：`https://paynexss.github.io/ios-repo`"
+          "markdown": "# 源签名公钥\n\n自建源（GitHub Pages）的 APT 签名公钥\n\n**版本** 1.0.0 ｜ **架构** iphoneos-arm64 ｜ **分类** Packaging\n\n**依赖**：`firmware (>= 15.0)`\n\n---\n\n来自 paynexss's repo。源地址：`https://paynexss.github.io/ios-repo`"
         },
         {
           "class": "DepictionSeparatorView"
@@ -17,12 +17,12 @@
         {
           "class": "DepictionTableTextView",
           "title": "版本",
-          "text": "0.2.0-7+debug"
+          "text": "1.0.0"
         },
         {
           "class": "DepictionTableTextView",
           "title": "标识",
-          "text": "com.harans.tweak.shortcuttodebug"
+          "text": "com.paynexc.repo-key"
         },
         {
           "class": "DepictionTableTextView",
@@ -32,22 +32,22 @@
         {
           "class": "DepictionTableTextView",
           "title": "大小",
-          "text": "28.7 KB"
+          "text": "3.7 KB"
         },
         {
           "class": "DepictionTableTextView",
           "title": "分类",
-          "text": "Tweaks"
+          "text": "Packaging"
         },
         {
           "class": "DepictionTableTextView",
           "title": "依赖",
-          "text": "mobilesubstrate (>= 0.9.5000)"
+          "text": "firmware (>= 15.0)"
         },
         {
           "class": "DepictionTableTextView",
           "title": "维护者",
-          "text": "Harlans"
+          "text": "paynexc"
         }
       ]
     },
@@ -57,10 +57,10 @@
       "views": [
         {
           "class": "DepictionMarkdownView",
-          "markdown": "## 0.2.0-7+debug\n\n- 当前版本 0.2.0-7+debug\n- 由 Harlans 维护\n\n> 发布记录见源首页 index.html"
+          "markdown": "## 1.0.0\n\n- 当前版本 1.0.0\n- 由 paynexc 维护\n\n> 发布记录见源首页 index.html"
         }
       ]
     }
   ],
-  "headerImage": "https://paynexss.github.io/ios-repo/assets/banner-com.harans.tweak.shortcuttodebug.png"
+  "headerImage": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.repo-key.png"
 }
