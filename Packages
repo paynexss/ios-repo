@@ -80,7 +80,7 @@ SHA256: 4af06262b174801c112e2d7ccb69b4c29dc06eb8339f70bf9124523123bcddda
 
 Package: com.paynexc.tweak.rexprounlock
 Name: RexProUnlock
-Version: 1.6.1
+Version: 1.8.0
 Architecture: iphoneos-arm64
 Description: 解锁 Rex (tv.rexnow.app) Pro：解锁标题、授权区文案与 Pro 功能放行（纯客户端状态改写，不改账号、不碰网络）
 Maintainer: paynexc
@@ -91,12 +91,12 @@ SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.paynexc.tweak.rexp
 Homepage: https://github.com/paynexss
 Icon: https://paynexss.github.io/ios-repo/icons/com.paynexc.tweak.rexprounlock.png
 Tag: purpose::extension
-Installed-Size: 168
-Filename: ./debs/com.paynexc.tweak.rexprounlock_1.6.1_iphoneos-arm64.deb
-Size: 7830
-MD5sum: f5346cdd9ee5667d0df7b5fb1dd276fe
-SHA1: 3acefdb03b923a27d19116b03856969e046defd2
-SHA256: 433aeb0d4271827bcf421913503ebb8e379a5fd3a791636125d2140496a0b7a6
+Installed-Size: 716
+Filename: ./debs/com.paynexc.tweak.rexprounlock_1.8.0_iphoneos-arm64.deb
+Size: 188882
+MD5sum: f16e092493493fc8d2b49ad653c8030d
+SHA1: 2b5606e1b8a05b3ed18e6bbe957c71bb0bee3276
+SHA256: 4ea906b3adfd1396d227f6e5a3c381f6845584bea4c6f7f68093396f4befa453
 
 Package: com.paynexc.tweak.sjjunlock
 Name: SJJUnlock

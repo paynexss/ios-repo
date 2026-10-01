@@ -9,7 +9,7 @@
       "views": [
         {
           "class": "DepictionMarkdownView",
-          "markdown": "# RexProUnlock\n\n解锁 Rex (tv.rexnow.app) Pro：解锁标题、授权区文案与 Pro 功能放行（纯客户端状态改写，不改账号、不碰网络）\n\n**版本** 1.6.1 ｜ **架构** iphoneos-arm64 ｜ **分类** Tweaks\n\n**依赖**：`firmware (>= 15.0)`\n\n---\n\n来自 paynexss's repo。源地址：`https://paynexss.github.io/ios-repo`"
+          "markdown": "# RexProUnlock\n\n解锁 Rex (tv.rexnow.app) Pro：解锁标题、授权区文案与 Pro 功能放行（纯客户端状态改写，不改账号、不碰网络）\n\n**版本** 1.8.0 ｜ **架构** iphoneos-arm64 ｜ **分类** Tweaks\n\n**依赖**：`firmware (>= 15.0)`\n\n---\n\n来自 paynexss's repo。源地址：`https://paynexss.github.io/ios-repo`"
         },
         {
           "class": "DepictionSeparatorView"
@@ -17,7 +17,7 @@
         {
           "class": "DepictionTableTextView",
           "title": "版本",
-          "text": "1.6.1"
+          "text": "1.8.0"
         },
         {
           "class": "DepictionTableTextView",
@@ -32,7 +32,7 @@
         {
           "class": "DepictionTableTextView",
           "title": "大小",
-          "text": "7.6 KB"
+          "text": "184.5 KB"
         },
         {
           "class": "DepictionTableTextView",
@@ -57,7 +57,7 @@
       "views": [
         {
           "class": "DepictionMarkdownView",
-          "markdown": "## 1.6.1\n\n- 当前版本 1.6.1\n- 由 paynexc 维护\n\n> 发布记录见源首页 index.html"
+          "markdown": "## 1.8.0\n\n- 当前版本 1.8.0\n- 由 paynexc 维护\n\n> 发布记录见源首页 index.html"
         }
       ]
     }
