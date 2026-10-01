@@ -1,0 +1,66 @@
+{
+  "class": "DepictionTabView",
+  "minVersion": "0.4",
+  "tintColor": "#0A84FF",
+  "tabs": [
+    {
+      "class": "DepictionStackView",
+      "tabname": "详情",
+      "views": [
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "# RexProUnlock\n\n解锁 Rex (tv.rexnow.app) Pro：解锁标题、授权区文案与 Pro 功能放行（纯客户端状态改写，不改账号、不碰网络）\n\n**版本** 1.6.1 ｜ **架构** iphoneos-arm64 ｜ **分类** Tweaks\n\n**依赖**：`firmware (>= 15.0)`\n\n---\n\n来自 paynexss's repo。源地址：`https://paynexss.github.io/ios-repo`"
+        },
+        {
+          "class": "DepictionSeparatorView"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "版本",
+          "text": "1.6.1"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "标识",
+          "text": "com.paynexc.tweak.rexprounlock"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "架构",
+          "text": "iphoneos-arm64"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "大小",
+          "text": "7.6 KB"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "分类",
+          "text": "Tweaks"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "依赖",
+          "text": "firmware (>= 15.0)"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "维护者",
+          "text": "paynexc"
+        }
+      ]
+    },
+    {
+      "class": "DepictionStackView",
+      "tabname": "更新日志",
+      "views": [
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "## 1.6.1\n\n- 当前版本 1.6.1\n- 由 paynexc 维护\n\n> 发布记录见源首页 index.html"
+        }
+      ]
+    }
+  ],
+  "headerImage": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.tweak.rexprounlock.png"
+}

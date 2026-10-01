@@ -29,6 +29,10 @@
               "accessibilityText": "EgernProUnlock"
             },
             {
+              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.tweak.rexprounlock.png",
+              "accessibilityText": "RexProUnlock"
+            },
+            {
               "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.tweak.sjjunlock.png",
               "accessibilityText": "SJJUnlock"
             }
@@ -36,7 +40,7 @@
         },
         {
           "class": "DepictionMarkdownView",
-          "markdown": "## paynexss's repo\n\n共 5 个包"
+          "markdown": "## paynexss's repo\n\n共 6 个包"
         }
       ]
     }
