@@ -1,0 +1,40 @@
+{
+  "class": "DepictionTabView",
+  "tintColor": "#0A84FF",
+  "tabs": [
+    {
+      "class": "DepictionStackView",
+      "tabname": "Featured",
+      "views": [
+        {
+          "class": "DepictionScreenshotsView",
+          "itemCornerRadius": 12,
+          "itemSize": "{300, 120}",
+          "type": "carousel",
+          "screenshots": [
+            {
+              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.harans.tweak.shortcuttodebug.png",
+              "accessibilityText": "Tap2DebugRootless"
+            },
+            {
+              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.appdecrypt.png",
+              "accessibilityText": "appdecrypt"
+            },
+            {
+              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.tweak.egernprounlock.png",
+              "accessibilityText": "EgernProUnlock"
+            },
+            {
+              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.tweak.sjjunlock.png",
+              "accessibilityText": "SJJUnlock"
+            }
+          ]
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "## paynexss's repo\n\n共 4 个包"
+        }
+      ]
+    }
+  ]
+}

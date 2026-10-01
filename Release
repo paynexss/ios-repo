@@ -1,0 +1,21 @@
+Origin: paynexss
+Label: paynexss's repo
+Suite: stable
+Version: 1.0
+Codename: ios
+Architectures: iphoneos-arm64
+Components: main
+Description: paynexss's repo
+Date: Thu, 01 Oct 2026 06:43:04 +0000
+MD5Sum:
+ 883b3e29dc9e13398d95752687a52491     3151 Packages
+ 9a6e2e8223ac6369d816341a141e2be6     1305 Packages.gz
+ ae90b995f453358eef9d4fcd856d288e     1408 Packages.bz2
+SHA1:
+ edfb60188ac8580a75c0b6098bb8198229bb200e     3151 Packages
+ 3edec59857f1e35b26dd4ef2c5b2d938cdf7d800     1305 Packages.gz
+ e819268559627a4ab1ed24673fce4f92d528d87c     1408 Packages.bz2
+SHA256:
+ ffdbcc2623356ceb036f5a50c2529aa7948d12cdaa87a90e8dc389a4920aad53     3151 Packages
+ e0f4b3acb56198d3116a08552aff73e8585c7269b6d50e8b2e6208e0fa746a41     1305 Packages.gz
+ 86783bc2b095d0d03013b422e64de1fe2237152b1f54488f786a08ed451e5401     1408 Packages.bz2

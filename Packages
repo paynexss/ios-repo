@@ -1,0 +1,80 @@
+Package: com.harans.tweak.shortcuttodebug
+Name: Tap2DebugRootless
+Version: 0.2.0
+Architecture: iphoneos-arm64
+Description: 无根越狱下通过 3D Touch 快捷方式打开设置中的“调试”页面
+Maintainer: Harlans
+Author: Harlans
+Section: Tweaks
+Depends: mobilesubstrate (>= 0.9.5000)
+SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.harans.tweak.shortcuttodebug.json
+Homepage: https://github.com/paynexss
+Icon: https://paynexss.github.io/ios-repo/icons/com.harans.tweak.shortcuttodebug.png
+Tag: purpose::extension
+Installed-Size: 2252
+Filename: ./debs/com.harans.tweak.shortcuttodebug_0.2.0_iphoneos-arm64.deb
+Size: 567496
+MD5sum: 306c0275c91aa9d535207ec323530f1e
+SHA1: 84ac8e889c8ba89e10bf8951925d7812f20ae714
+SHA256: f4b208c5d35679075b95bd268e080bc16c8d05769d57ed5e21e1a53349860dd4
+
+Package: com.paynexc.appdecrypt
+Name: appdecrypt
+Version: 1.0.0
+Architecture: iphoneos-arm64
+Description: 设备端砸壳 CLI（task_for_pid + 内存解密，无需 frida）
+Maintainer: paynexc
+Author: paynexc
+Section: Utilities
+Depends: firmware (>= 15.0)
+SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.paynexc.appdecrypt.json
+Homepage: https://github.com/paynexss
+Icon: https://paynexss.github.io/ios-repo/icons/com.paynexc.appdecrypt.png
+Tag: role::hacker
+Installed-Size: 1324
+Filename: ./debs/com.paynexc.appdecrypt_1.0.0_iphoneos-arm64.deb
+Size: 348382
+MD5sum: 77af1b17beab45a75ced201425a19964
+SHA1: e3c3bb5ceb8f7cd02d90d939340ffefdd90ad7e9
+SHA256: b637bde4dd812375a7156e809813acfa58def54e221cc64bae0b06854f618923
+
+Package: com.paynexc.tweak.egernprounlock
+Name: EgernProUnlock
+Version: 2.5.0
+Architecture: iphoneos-arm64
+Description: 解锁 Egern Pro（v2.5.0：自包含 hook 层，不再依赖 CydiaSubstrate/ellekit 的 MSHookFunction API，只需一个能注入 dylib 的环境）
+Maintainer: paynexc
+Author: paynexc
+Section: Tweaks
+Depends: firmware (>= 15.0)
+SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.paynexc.tweak.egernprounlock.json
+Homepage: https://github.com/paynexss
+Icon: https://paynexss.github.io/ios-repo/icons/com.paynexc.tweak.egernprounlock.png
+Tag: purpose::extension
+Installed-Size: 1408
+Filename: ./debs/com.paynexc.tweak.egernprounlock_2.5.0_iphoneos-arm64.deb
+Size: 341920
+MD5sum: 38081681b91b05406bbce7b4e21013ea
+SHA1: 1130458c99f06b6e9b697524645baf0b3d8abd6a
+SHA256: 4af06262b174801c112e2d7ccb69b4c29dc06eb8339f70bf9124523123bcddda
+
+Package: com.paynexc.tweak.sjjunlock
+Name: SJJUnlock
+Version: 1.0.1-2+debug
+Architecture: iphoneos-arm64
+Description: 绕过抖音优化 siwenjiajia 授权
+Maintainer: paynexc
+Author: paynexc
+Section: Tweaks
+Depends: firmware (>= 15.0)
+SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.paynexc.tweak.sjjunlock.json
+Homepage: https://github.com/paynexss
+Icon: https://paynexss.github.io/ios-repo/icons/com.paynexc.tweak.sjjunlock.png
+Tag: purpose::extension
+Installed-Size: 1088
+Filename: ./debs/com.paynexc.tweak.sjjunlock_1.0.1-2+debug_iphoneos-arm64.deb
+Size: 315522
+MD5sum: 6250f369d76579190a4e929c49f3bf6a
+SHA1: b089f3dba61a2f581b433a7920020916886cdd52
+SHA256: 4f28a09beb25b21eeff4d34a8792de631841d76d84ae5e2ca21ec3f9b70db98f
+

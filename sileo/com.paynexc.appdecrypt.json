@@ -1,0 +1,66 @@
+{
+  "class": "DepictionTabView",
+  "minVersion": "0.4",
+  "tintColor": "#BF5AF2",
+  "tabs": [
+    {
+      "class": "DepictionStackView",
+      "tabname": "详情",
+      "views": [
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "# appdecrypt\n\n设备端砸壳 CLI（task_for_pid + 内存解密，无需 frida）\n\n**版本** 1.0.0 ｜ **架构** iphoneos-arm64 ｜ **分类** Utilities\n\n**依赖**：`firmware (>= 15.0)`\n\n---\n\n来自 paynexss's repo。源地址：`https://paynexss.github.io/ios-repo`"
+        },
+        {
+          "class": "DepictionSeparatorView"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "版本",
+          "text": "1.0.0"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "标识",
+          "text": "com.paynexc.appdecrypt"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "架构",
+          "text": "iphoneos-arm64"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "大小",
+          "text": "340.2 KB"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "分类",
+          "text": "Utilities"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "依赖",
+          "text": "firmware (>= 15.0)"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "维护者",
+          "text": "paynexc"
+        }
+      ]
+    },
+    {
+      "class": "DepictionStackView",
+      "tabname": "更新日志",
+      "views": [
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "## 1.0.0\n\n- 当前版本 1.0.0\n- 由 paynexc 维护\n\n> 发布记录见源首页 index.html"
+        }
+      ]
+    }
+  ],
+  "headerImage": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.appdecrypt.png"
+}
