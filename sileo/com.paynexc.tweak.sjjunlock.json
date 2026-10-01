@@ -9,7 +9,7 @@
       "views": [
         {
           "class": "DepictionMarkdownView",
-          "markdown": "# SJJUnlock\n\n绕过抖音优化 siwenjiajia 授权\n\n**版本** 1.0.1-2+debug ｜ **架构** iphoneos-arm64 ｜ **分类** Tweaks\n\n**依赖**：`firmware (>= 15.0)`\n\n---\n\n来自 paynexss's repo。源地址：`https://paynexss.github.io/ios-repo`"
+          "markdown": "# SJJUnlock\n\n绕过抖音 siwenjiajia 插件授权校验（完全离线：不跳作者主页、不依赖联网校验）\n\n**版本** 1.1.0-2+debug ｜ **架构** iphoneos-arm64 ｜ **分类** Tweaks\n\n**依赖**：`firmware (>= 15.0)`\n\n---\n\n来自 paynexss's repo。源地址：`https://paynexss.github.io/ios-repo`"
         },
         {
           "class": "DepictionSeparatorView"
@@ -17,7 +17,7 @@
         {
           "class": "DepictionTableTextView",
           "title": "版本",
-          "text": "1.0.1-2+debug"
+          "text": "1.1.0-2+debug"
         },
         {
           "class": "DepictionTableTextView",
@@ -32,7 +32,7 @@
         {
           "class": "DepictionTableTextView",
           "title": "大小",
-          "text": "308.1 KB"
+          "text": "1.6 MB"
         },
         {
           "class": "DepictionTableTextView",
@@ -57,7 +57,7 @@
       "views": [
         {
           "class": "DepictionMarkdownView",
-          "markdown": "## 1.0.1-2+debug\n\n- 当前版本 1.0.1-2+debug\n- 由 paynexc 维护\n\n> 发布记录见源首页 index.html"
+          "markdown": "## 1.1.0-2+debug\n\n- 当前版本 1.1.0-2+debug\n- 由 paynexc 维护\n\n> 发布记录见源首页 index.html"
         }
       ]
     }

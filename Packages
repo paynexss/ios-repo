@@ -100,9 +100,9 @@ SHA256: 433aeb0d4271827bcf421913503ebb8e379a5fd3a791636125d2140496a0b7a6
 
 Package: com.paynexc.tweak.sjjunlock
 Name: SJJUnlock
-Version: 1.0.1-2+debug
+Version: 1.1.0-2+debug
 Architecture: iphoneos-arm64
-Description: 绕过抖音优化 siwenjiajia 授权
+Description: 绕过抖音 siwenjiajia 插件授权校验（完全离线：不跳作者主页、不依赖联网校验）
 Maintainer: paynexc
 Author: paynexc
 Section: Tweaks
@@ -111,10 +111,10 @@ SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.paynexc.tweak.sjju
 Homepage: https://github.com/paynexss
 Icon: https://paynexss.github.io/ios-repo/icons/com.paynexc.tweak.sjjunlock.png
 Tag: purpose::extension
-Installed-Size: 1088
-Filename: ./debs/com.paynexc.tweak.sjjunlock_1.0.1-2+debug_iphoneos-arm64.deb
-Size: 315522
-MD5sum: 6250f369d76579190a4e929c49f3bf6a
-SHA1: b089f3dba61a2f581b433a7920020916886cdd52
-SHA256: 4f28a09beb25b21eeff4d34a8792de631841d76d84ae5e2ca21ec3f9b70db98f
+Installed-Size: 5216
+Filename: ./debs/com.paynexc.tweak.sjjunlock_1.1.0-2+debug_iphoneos-arm64.deb
+Size: 1636358
+MD5sum: b0e37571408428cc183ea284352bfa83
+SHA1: 72233344a4849b394bbbb3199e80187e773b83a5
+SHA256: 4a4b6ccddfeb6b6fd8a3ab894d8b8edd415ef687102463e59b89cb1397d5c4b7
 
