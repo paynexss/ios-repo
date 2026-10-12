@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """
-build_pages.py —— 生成现代 iOS 原生风格的源首页与详情页
-- 纯原生 HTML/CSS/JS，零外部 CDN 依赖，暗色/亮色自适应
-- 支持 Sileo / Zebra 一键加源跳转、一键复制源地址、实时搜索过滤
+build_pages.py —— 生成温润质感（Notion / Linear 暖灰风）的源首页与详情页
+- 浅色：柔和米白纸质底色（#fbfbfa），石墨暖黑文字（#37352f），柔和微光分界
+- 深色：石墨沉静底色（#181819），微凸卡片（#212123），温润柔白文字（#ececed）
+- 无高饱和刺眼蓝，去除所有 AI 味模板套路，回归精致克制的手工感
 """
 import html
 import os
-import re
 
 REPO_URL = "http://repo.paynexss.fun"
 REPO_TITLE = "paynexss's repo"
-REPO_DESC = "给越狱设备（Rootless / Dopamine）自用的 iOS Tweak 集合"
 
 
 def human_size(n):
@@ -18,11 +17,12 @@ def human_size(n):
         n = float(n)
     except (ValueError, TypeError):
         return "-"
-    for unit in ("B", "KB", "MB", "GB"):
-        if n < 1024.0 or unit == "MB":
-            return f"{n:.1f} {unit}".replace(".0 ", " ")
-        n /= 1024.0
-    return f"{n:.1f} MB"
+    if n < 1024:
+        return f"{int(n)} B"
+    elif n < 1024 * 1024:
+        return f"{n / 1024:.1f} KB"
+    else:
+        return f"{n / (1024 * 1024):.1f} MB"
 
 
 def parse_packages(path="Packages"):
@@ -50,18 +50,16 @@ def parse_packages(path="Packages"):
 
 
 def generate_index_html(packages):
-    pkg_cards = []
+    rows = []
     for p in packages:
         pkg_id = p.get("Package", "")
         name = p.get("Name") or pkg_id
         version = p.get("Version", "1.0.0")
         desc = p.get("Description", "").split("\n")[0]
         size_str = human_size(p.get("Size", 0))
+
         filename = p.get("Filename", "")
-        if filename.startswith("./"):
-            deb_href = filename[2:]
-        else:
-            deb_href = filename
+        deb_href = filename[2:] if filename.startswith("./") else filename
 
         icon_path = f"icons/{pkg_id}.png"
         if not os.path.isfile(icon_path):
@@ -69,38 +67,29 @@ def generate_index_html(packages):
 
         depiction_href = f"depictions/{pkg_id}.html"
 
-        card = f"""
-      <article class="pkg-card" data-name="{html.escape(name.lower())}" data-id="{html.escape(pkg_id.lower())}" data-desc="{html.escape(desc.lower())}">
-        <div class="pkg-main">
-          <a class="pkg-icon-link" href="{depiction_href}" title="查看详情">
-            <img class="pkg-icon" src="{icon_path}" alt="{html.escape(name)}" loading="lazy">
-          </a>
-          <div class="pkg-info">
-            <div class="pkg-header">
-              <a class="pkg-name" href="{depiction_href}">{html.escape(name)}</a>
-              <span class="badge badge-version">v{html.escape(version)}</span>
-              <span class="badge badge-arch">rootless</span>
+        row = f"""
+        <div class="pkg-row" data-name="{html.escape(name.lower())}" data-id="{html.escape(pkg_id.lower())}" data-desc="{html.escape(desc.lower())}">
+          <a class="row-main" href="{depiction_href}">
+            <img class="pkg-icon" src="{icon_path}" alt="" width="42" height="42" loading="lazy">
+            <div class="pkg-body">
+              <div class="pkg-header">
+                <span class="pkg-name">{html.escape(name)}</span>
+                <span class="pkg-ver">v{html.escape(version)}</span>
+              </div>
+              <div class="pkg-id">{html.escape(pkg_id)}</div>
+              <div class="pkg-desc">{html.escape(desc)}</div>
             </div>
-            <div class="pkg-id">{html.escape(pkg_id)}</div>
-            <p class="pkg-desc">{html.escape(desc)}</p>
+          </a>
+          <div class="row-side">
+            <a class="btn-deb" href="{html.escape(deb_href)}" download title="下载 deb ({size_str})">deb</a>
+            <a class="row-arrow" href="{depiction_href}" aria-label="查看详情">
+              <svg width="6" height="10" viewBox="0 0 6 10" fill="none"><path d="M1 1l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
-        </div>
-        <div class="pkg-footer">
-          <div class="pkg-meta">
-            <span class="meta-tag">{html.escape(p.get('Section', 'Tweaks'))}</span>
-            <span class="meta-dot">·</span>
-            <span class="meta-size">{size_str}</span>
-          </div>
-          <div class="pkg-actions">
-            <a class="btn btn-secondary btn-sm" href="{depiction_href}">查看详情</a>
-            <a class="btn btn-primary btn-sm" href="{html.escape(deb_href)}" download>下载 deb</a>
-          </div>
-        </div>
-      </article>"""
-        pkg_cards.append(card)
+        </div>"""
+        rows.append(row)
 
-    cards_html = "\n".join(pkg_cards)
-    total_count = len(packages)
+    rows_html = "\n".join(rows)
 
     return f"""<!doctype html>
 <html lang="zh-CN">
@@ -108,416 +97,360 @@ def generate_index_html(packages):
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{html.escape(REPO_TITLE)}</title>
-  <meta name="description" content="{html.escape(REPO_DESC)}">
   <link rel="icon" type="image/png" href="CydiaIcon.png">
-  <link rel="apple-touch-icon" href="CydiaIcon.png">
   <style>
     :root {{
-      --bg: #f2f2f7;
+      --bg: #fbfbfa;
       --card-bg: #ffffff;
-      --card-border: rgba(60, 60, 67, 0.1);
-      --card-hover: rgba(60, 60, 67, 0.16);
-      --text-main: #1c1c1e;
-      --text-sub: #636366;
-      --text-tertiary: #8e8e93;
-      --tint: #007aff;
-      --tint-hover: #0062cc;
-      --tint-light: rgba(0, 122, 255, 0.1);
-      --badge-bg: rgba(142, 142, 147, 0.12);
-      --badge-text: #48484a;
-      --input-bg: #ffffff;
-      --input-border: rgba(60, 60, 67, 0.15);
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 18px;
-      --radius-xl: 22px;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.06);
+      --border: #eceae5;
+      --border-subtle: #f2f0eb;
+      --text: #37352f;
+      --text-sec: #787774;
+      --text-ter: #9b9a97;
+      --primary-btn-bg: #2f2e2c;
+      --primary-btn-text: #ffffff;
+      --sec-btn-bg: #f1f0ec;
+      --sec-btn-text: #37352f;
+      --sec-btn-hover: #e8e6e0;
+      --search-bg: #f4f3ef;
+      --badge-bg: #f1f0ec;
+      --badge-text: #6b6965;
+      --radius: 12px;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Segoe UI", sans-serif;
+      --mono: ui-monospace, "SF Mono", Menlo, Monaco, monospace;
     }}
 
     @media (prefers-color-scheme: dark) {{
       :root {{
-        --bg: #000000;
-        --card-bg: #1c1c1e;
-        --card-border: rgba(255, 255, 255, 0.08);
-        --card-hover: rgba(255, 255, 255, 0.16);
-        --text-main: #f5f5f7;
-        --text-sub: #aeaeb2;
-        --text-tertiary: #636366;
-        --tint: #0a84ff;
-        --tint-hover: #339aff;
-        --tint-light: rgba(10, 132, 255, 0.18);
-        --badge-bg: rgba(255, 255, 255, 0.12);
-        --badge-text: #e5e5ea;
-        --input-bg: #1c1c1e;
-        --input-border: rgba(255, 255, 255, 0.14);
-        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+        --bg: #181819;
+        --card-bg: #212123;
+        --border: #2e2e31;
+        --border-subtle: #272729;
+        --text: #ececed;
+        --text-sec: #9b9b9f;
+        --text-ter: #68686c;
+        --primary-btn-bg: #ececed;
+        --primary-btn-text: #181819;
+        --sec-btn-bg: #2c2c2f;
+        --sec-btn-text: #ececed;
+        --sec-btn-hover: #36363a;
+        --search-bg: #262629;
+        --badge-bg: #2a2a2d;
+        --badge-text: #a8a8ac;
       }}
     }}
 
-    * {{ box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }}
+    * {{ box-sizing: border-box; margin: 0; padding: 0; }}
     body {{
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", sans-serif;
+      font-family: var(--font);
       background: var(--bg);
-      color: var(--text-main);
+      color: var(--text);
       line-height: 1.5;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
       padding: env(safe-area-inset-top, 24px) 16px env(safe-area-inset-bottom, 32px);
+      -webkit-font-smoothing: antialiased;
     }}
 
     .container {{
-      width: 100%;
-      max-width: 680px;
+      max-width: 560px;
       margin: 0 auto;
-      flex: 1;
     }}
 
-    /* Header */
-    .hero {{
-      text-align: center;
-      padding: 28px 0 20px;
-    }}
-    .repo-avatar {{
-      width: 80px;
-      height: 80px;
-      border-radius: 22.5%;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-      border: 1px solid var(--card-border);
-      margin-bottom: 14px;
-      object-fit: cover;
-    }}
-    .hero-title {{
-      font-size: 1.85rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
-    }}
-    .hero-subtitle {{
-      font-size: 0.95rem;
-      color: var(--text-sub);
-      margin-bottom: 14px;
-    }}
-    .hero-tags {{
+    /* 顶部标题栏 */
+    .header {{
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 16px;
-    }}
-    .badge {{
-      display: inline-flex;
       align-items: center;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      line-height: 1.2;
-      background: var(--badge-bg);
-      color: var(--badge-text);
+      gap: 13px;
+      padding: 18px 4px 16px;
     }}
-    .badge-tint {{
-      background: var(--tint-light);
-      color: var(--tint);
+    .repo-icon {{
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
     }}
-    .badge-version {{
-      background: var(--tint-light);
-      color: var(--tint);
+    .header-text {{
+      flex: 1;
+      min-width: 0;
     }}
-    .badge-arch {{
-      background: var(--badge-bg);
-      color: var(--badge-text);
-      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    .header-title {{
+      font-size: 1.22rem;
+      font-weight: 650;
+      letter-spacing: -0.015em;
+      color: var(--text);
+    }}
+    .header-sub {{
+      font-size: 0.81rem;
+      color: var(--text-sec);
+      margin-top: 1px;
     }}
 
-    /* Source Box Card */
-    .source-box {{
+    /* 源地址卡片 */
+    .source-card {{
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-xl);
-      padding: 16px;
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }}
-    .url-display {{
+    .source-url-row {{
       display: flex;
       align-items: center;
-      background: var(--bg);
-      border: 1px solid var(--input-border);
-      border-radius: var(--radius-md);
-      padding: 9px 12px;
+      justify-content: space-between;
       gap: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }}
-    .url-text {{
-      flex: 1;
-      font-family: ui-monospace, "SF Mono", Menlo, monospace;
-      font-size: 0.88rem;
-      color: var(--text-main);
+    .source-url {{
+      font-family: var(--mono);
+      font-size: 0.84rem;
+      color: var(--text);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       user-select: all;
     }}
     .btn-copy {{
-      background: none;
-      border: none;
-      color: var(--tint);
+      font-size: 0.8rem;
       font-weight: 600;
-      font-size: 0.85rem;
+      color: var(--text);
+      background: var(--sec-btn-bg);
+      border: 1px solid var(--border);
       cursor: pointer;
-      padding: 4px 8px;
-      border-radius: var(--radius-sm);
+      padding: 3px 9px;
+      border-radius: 6px;
+      flex-shrink: 0;
       transition: background 0.15s;
     }}
     .btn-copy:hover {{
-      background: var(--tint-light);
+      background: var(--sec-btn-hover);
     }}
-    .quick-add-group {{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+    .source-actions {{
+      display: flex;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
     }}
-    .btn {{
+    .btn-action {{
+      flex: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      padding: 11px 16px;
-      border-radius: var(--radius-md);
-      font-size: 0.92rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: transform 0.1s, opacity 0.15s, background 0.15s;
-    }}
-    .btn:active {{
-      transform: scale(0.98);
-      opacity: 0.9;
-    }}
-    .btn-primary {{
-      background: var(--tint);
-      color: #ffffff;
-    }}
-    .btn-primary:hover {{
-      background: var(--tint-hover);
-    }}
-    .btn-secondary {{
-      background: var(--bg);
-      color: var(--text-main);
-      border-color: var(--card-border);
-    }}
-    .btn-secondary:hover {{
-      border-color: var(--card-hover);
-    }}
-    .btn-sm {{
-      padding: 6px 12px;
+      padding: 8px 12px;
       font-size: 0.82rem;
-      border-radius: var(--radius-sm);
+      font-weight: 600;
+      border-radius: 7px;
+      text-decoration: none;
+      transition: opacity 0.15s, background 0.15s;
+    }}
+    .btn-action.primary {{
+      background: var(--primary-btn-bg);
+      color: var(--primary-btn-text);
+    }}
+    .btn-action.secondary {{
+      background: var(--sec-btn-bg);
+      color: var(--sec-btn-text);
+    }}
+    .btn-action:hover {{
+      opacity: 0.88;
     }}
 
-    /* Search & Filter */
-    .filter-section {{
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }}
+    /* 搜索栏 */
     .search-wrap {{
       position: relative;
-      flex: 1;
+      margin-bottom: 14px;
+    }}
+    .search-input {{
+      width: 100%;
+      height: 35px;
+      padding: 0 12px 0 32px;
+      background: var(--search-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.86rem;
+      color: var(--text);
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.15s;
+    }}
+    .search-input:focus {{
+      border-color: var(--text-sec);
+    }}
+    .search-input::placeholder {{
+      color: var(--text-ter);
     }}
     .search-icon {{
       position: absolute;
-      left: 12px;
+      left: 10px;
       top: 50%;
       transform: translateY(-50%);
-      width: 15px;
-      height: 15px;
+      width: 13px;
+      height: 13px;
+      stroke: var(--text-ter);
       fill: none;
-      stroke: var(--text-tertiary);
       stroke-width: 2;
       stroke-linecap: round;
       pointer-events: none;
     }}
-    .search-input {{
-      width: 100%;
-      padding: 10px 12px 10px 34px;
-      background: var(--card-bg);
-      border: 1px solid var(--input-border);
-      border-radius: var(--radius-md);
-      font-size: 0.9rem;
-      color: var(--text-main);
-      outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }}
-    .search-input:focus {{
-      border-color: var(--tint);
-      box-shadow: 0 0 0 3px var(--tint-light);
-    }}
-    .pkg-count {{
-      font-size: 0.82rem;
-      color: var(--text-tertiary);
-      white-space: nowrap;
-      font-weight: 500;
+
+    /* 列表头 */
+    .list-title {{
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-ter);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0 4px 6px;
+      display: flex;
+      justify-content: space-between;
     }}
 
-    /* Package Cards */
-    .pkg-list {{
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 32px;
-    }}
-    .pkg-card {{
+    /* 分组列表 (Inset Grouped) */
+    .pkg-group {{
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }}
-    .pkg-card:hover {{
-      border-color: var(--card-hover);
-      box-shadow: var(--shadow-md);
-    }}
-    .pkg-main {{
+    .pkg-row {{
       display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      margin-bottom: 12px;
+      align-items: center;
+      padding: 11px 13px;
+      transition: background 0.1s;
     }}
-    .pkg-icon-link {{
-      flex: 0 0 auto;
+    .pkg-row + .pkg-row {{
+      border-top: 1px solid var(--border-subtle);
+    }}
+    .pkg-row:hover {{
+      background: var(--sec-btn-bg);
+    }}
+    .row-main {{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
       text-decoration: none;
+      color: inherit;
     }}
     .pkg-icon {{
-      width: 58px;
-      height: 58px;
-      border-radius: 22.5%;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      border: 1px solid var(--card-border);
-      display: block;
-      background: var(--bg);
+      width: 40px;
+      height: 40px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
       object-fit: cover;
     }}
-    .pkg-info {{
+    .pkg-body {{
       flex: 1;
       min-width: 0;
     }}
     .pkg-header {{
       display: flex;
-      align-items: center;
-      flex-wrap: wrap;
+      align-items: baseline;
       gap: 6px;
-      margin-bottom: 3px;
     }}
     .pkg-name {{
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text-main);
-      text-decoration: none;
-      letter-spacing: -0.01em;
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--text);
     }}
-    .pkg-name:hover {{
-      color: var(--tint);
+    .pkg-ver {{
+      font-size: 0.72rem;
+      font-family: var(--mono);
+      color: var(--badge-text);
+      background: var(--badge-bg);
+      padding: 1px 5px;
+      border-radius: 4px;
     }}
     .pkg-id {{
-      font-size: 0.78rem;
-      font-family: ui-monospace, "SF Mono", Menlo, monospace;
-      color: var(--text-tertiary);
-      margin-bottom: 6px;
-      word-break: break-all;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-ter);
+      margin-top: 1px;
     }}
     .pkg-desc {{
-      font-size: 0.88rem;
-      color: var(--text-sub);
-      line-height: 1.45;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+      font-size: 0.78rem;
+      color: var(--text-sec);
+      white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
     }}
-    .pkg-footer {{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid var(--card-border);
-      padding-top: 10px;
-      gap: 12px;
-    }}
-    .pkg-meta {{
-      font-size: 0.8rem;
-      color: var(--text-tertiary);
+    .row-side {{
       display: flex;
       align-items: center;
       gap: 6px;
+      margin-left: 8px;
+      flex-shrink: 0;
     }}
-    .meta-tag {{
-      background: var(--badge-bg);
-      color: var(--badge-text);
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-    }}
-    .pkg-actions {{
-      display: flex;
-      gap: 8px;
-    }}
-
-    .empty-state {{
-      display: none;
-      text-align: center;
-      padding: 48px 16px;
-      color: var(--text-tertiary);
-      background: var(--card-bg);
-      border: 1px dashed var(--card-border);
-      border-radius: var(--radius-lg);
-    }}
-
-    /* Footer */
-    footer {{
-      text-align: center;
-      font-size: 0.82rem;
-      color: var(--text-tertiary);
-      padding: 16px 0 24px;
-      border-top: 1px solid var(--card-border);
-    }}
-    footer a {{
-      color: var(--text-sub);
+    .btn-deb {{
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      font-family: var(--mono);
+      color: var(--sec-btn-text);
+      background: var(--sec-btn-bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
       text-decoration: none;
-      margin: 0 4px;
-      transition: color 0.15s;
+      transition: background 0.15s;
     }}
-    footer a:hover {{
-      color: var(--tint);
+    .btn-deb:hover {{
+      background: var(--sec-btn-hover);
     }}
-    .footer-links {{
-      margin-bottom: 8px;
+    .row-arrow {{
+      color: var(--text-ter);
+      display: flex;
+      align-items: center;
+      padding: 4px 2px;
+      text-decoration: none;
     }}
 
-    /* Toast */
+    .empty {{
+      display: none;
+      padding: 24px;
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--text-ter);
+    }}
+
+    /* 脚注 */
+    .footer {{
+      text-align: center;
+      font-size: 0.76rem;
+      color: var(--text-ter);
+      padding: 12px 0 20px;
+    }}
+    .footer a {{
+      color: var(--text-sec);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--text-ter);
+    }}
+    .footer a:hover {{
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }}
+
+    /* 复制轻提示 */
     .toast {{
       position: fixed;
       bottom: 24px;
       left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: rgba(0, 0, 0, 0.85);
-      color: #fff;
-      padding: 10px 20px;
+      transform: translateX(-50%) translateY(50px);
+      background: var(--primary-btn-bg);
+      color: var(--primary-btn-text);
+      padding: 6px 14px;
       border-radius: 999px;
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       font-weight: 500;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-      pointer-events: none;
       opacity: 0;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
-      z-index: 999;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      pointer-events: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 100;
     }}
     .toast.show {{
       transform: translateX(-50%) translateY(0);
@@ -527,102 +460,81 @@ def generate_index_html(packages):
 </head>
 <body>
   <div class="container">
-    <header class="hero">
-      <img class="repo-avatar" src="CydiaIcon.png" alt="源图标">
-      <h1 class="hero-title">{html.escape(REPO_TITLE)}</h1>
-      <p class="hero-subtitle">{html.escape(REPO_DESC)}</p>
-      <div class="hero-tags">
-        <span class="badge badge-tint">Rootless 越狱</span>
-        <span class="badge badge-arch">iphoneos-arm64</span>
-        <span class="badge badge-arch">iOS 15.0+</span>
-        <span class="badge badge-tint">免公钥证书</span>
+    <header class="header">
+      <img class="repo-icon" src="CydiaIcon.png" alt="">
+      <div class="header-text">
+        <h1 class="header-title">{html.escape(REPO_TITLE)}</h1>
+        <div class="header-sub">Rootless / Dopamine · iphoneos-arm64 · 自用源</div>
       </div>
     </header>
 
-    <section class="source-box" aria-label="软件源添加">
-      <div class="url-display">
-        <span class="url-text" id="repoUrl">{html.escape(REPO_URL)}</span>
-        <button class="btn-copy" id="copyBtn" onclick="copyRepoUrl()" type="button">复制</button>
+    <div class="source-card">
+      <div class="source-url-row">
+        <span class="source-url" id="repoUrl">{html.escape(REPO_URL)}</span>
+        <button class="btn-copy" id="copyBtn" onclick="copyUrl()">复制</button>
       </div>
-      <div class="quick-add-group">
-        <a class="btn btn-primary" href="sileo://source/{REPO_URL}/">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          加到 Sileo
-        </a>
-        <a class="btn btn-secondary" href="zbra://sources/add/{REPO_URL}/">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M7 8h10l-10 8h10"/></svg>
-          加到 Zebra
-        </a>
+      <div class="source-actions">
+        <a class="btn-action primary" href="sileo://source/{REPO_URL}/">加到 Sileo</a>
+        <a class="btn-action secondary" href="zbra://sources/add/{REPO_URL}/">加到 Zebra</a>
       </div>
-    </section>
-
-    <div class="filter-section">
-      <div class="search-wrap">
-        <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input class="search-input" id="searchInput" type="search" placeholder="搜索插件名称、描述或包标识..." autocomplete="off">
-      </div>
-      <span class="pkg-count" id="pkgCount">共 {total_count} 个插件</span>
     </div>
 
-    <main class="pkg-list" id="pkgList">
-{cards_html}
-    </main>
-
-    <div class="empty-state" id="emptyState">
-      没有找到匹配的插件
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input class="search-input" id="searchInput" type="search" placeholder="搜索插件..." autocomplete="off">
     </div>
 
-    <footer>
-      <div class="footer-links">
-        索引：<a href="Packages">Packages</a> ·
+    <div class="list-title">
+      <span>插件</span>
+      <span id="pkgCount">{len(packages)} 个</span>
+    </div>
+
+    <div class="pkg-group" id="pkgGroup">
+{rows_html}
+      <div class="empty" id="emptyState">未找到匹配插件</div>
+    </div>
+
+    <div class="footer">
+      <p>
+        <a href="Packages">Packages</a> ·
         <a href="Packages.gz">Packages.gz</a> ·
-        <a href="Packages.bz2">Packages.bz2</a> ·
         <a href="Release">Release</a>
-      </div>
-      <p>{html.escape(REPO_TITLE)} · 仅用于自用设备 rootless 环境</p>
-    </footer>
+      </p>
+    </div>
   </div>
 
-  <div class="toast" id="toast">已复制源地址</div>
+  <div class="toast" id="toast">已复制</div>
 
   <script>
-    function copyRepoUrl() {{
+    function copyUrl() {{
       const text = document.getElementById('repoUrl').innerText.trim();
       const btn = document.getElementById('copyBtn');
       const toast = document.getElementById('toast');
-
       navigator.clipboard.writeText(text).then(() => {{
-        btn.textContent = '已复制 ✓';
+        btn.textContent = '已复制';
         toast.classList.add('show');
         setTimeout(() => {{
           btn.textContent = '复制';
           toast.classList.remove('show');
-        }}, 2000);
-      }}).catch(() => {{
-        prompt('请手动复制源地址：', text);
-      }});
+        }}, 1800);
+      }}).catch(() => prompt('复制源地址：', text));
     }}
 
-    const searchInput = document.getElementById('searchInput');
-    const pkgList = document.getElementById('pkgList');
-    const emptyState = document.getElementById('emptyState');
-    const pkgCount = document.getElementById('pkgCount');
-    const cards = Array.from(document.querySelectorAll('.pkg-card'));
+    const input = document.getElementById('searchInput');
+    const rows = Array.from(document.querySelectorAll('.pkg-row'));
+    const count = document.getElementById('pkgCount');
+    const empty = document.getElementById('emptyState');
 
-    searchInput.addEventListener('input', (e) => {{
+    input.addEventListener('input', (e) => {{
       const q = e.target.value.trim().toLowerCase();
-      let visible = 0;
-      cards.forEach(card => {{
-        const name = card.dataset.name || '';
-        const id = card.dataset.id || '';
-        const desc = card.dataset.desc || '';
-        const match = !q || name.includes(q) || id.includes(q) || desc.includes(q);
-        card.style.display = match ? '' : 'none';
-        if (match) visible++;
+      let matched = 0;
+      rows.forEach(r => {{
+        const ok = !q || r.dataset.name.includes(q) || r.dataset.id.includes(q) || r.dataset.desc.includes(q);
+        r.style.display = ok ? '' : 'none';
+        if (ok) matched++;
       }});
-
-      pkgCount.textContent = q ? `找到 ${{visible}} 个` : `共 ${{cards.length}} 个插件`;
-      emptyState.style.display = (visible === 0) ? 'block' : 'none';
+      count.textContent = matched + ' 个';
+      empty.style.display = matched === 0 ? 'block' : 'none';
     }});
   </script>
 </body>
@@ -638,26 +550,14 @@ def generate_depiction_html(pkg):
     section = pkg.get("Section", "Tweaks")
     depends = pkg.get("Depends", "firmware (>= 15.0)")
     maintainer = pkg.get("Maintainer", "paynexc")
-    author = pkg.get("Author", maintainer)
     size_str = human_size(pkg.get("Size", 0))
-    inst_size = pkg.get("Installed-Size", "-")
-    if inst_size != "-" and inst_size.isdigit():
-        inst_size = f"{inst_size} KB"
 
     filename = pkg.get("Filename", "")
-    if filename.startswith("./"):
-        deb_href = "../" + filename[2:]
-    else:
-        deb_href = "../" + filename
-
-    banner_rel = f"assets/banner-{pkg_id}.png"
-    has_banner = os.path.isfile(banner_rel)
-    banner_img_tag = f'<img class="banner-img" src="../{banner_rel}" alt="{html.escape(name)} banner">' if has_banner else ''
+    deb_href = "../" + (filename[2:] if filename.startswith("./") else filename)
 
     icon_rel = f"icons/{pkg_id}.png"
     icon_src = f"../{icon_rel}" if os.path.isfile(icon_rel) else "../CydiaIcon.png"
 
-    # Description lines
     desc_paragraphs = "\n".join(f"<p>{html.escape(line.strip())}</p>" for line in desc.split("\n") if line.strip())
 
     return f"""<!doctype html>
@@ -665,277 +565,200 @@ def generate_depiction_html(pkg):
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>{html.escape(name)} · {html.escape(REPO_TITLE)}</title>
+  <title>{html.escape(name)}</title>
   <style>
     :root {{
-      --bg: #f2f2f7;
+      --bg: #fbfbfa;
       --card-bg: #ffffff;
-      --card-border: rgba(60, 60, 67, 0.1);
-      --text-main: #1c1c1e;
-      --text-sub: #636366;
-      --text-tertiary: #8e8e93;
-      --tint: #007aff;
-      --tint-hover: #0062cc;
-      --tint-light: rgba(0, 122, 255, 0.1);
-      --badge-bg: rgba(142, 142, 147, 0.12);
-      --badge-text: #48484a;
-      --radius-md: 14px;
-      --radius-lg: 18px;
-      --radius-xl: 22px;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.06);
+      --border: #eceae5;
+      --border-subtle: #f2f0eb;
+      --text: #37352f;
+      --text-sec: #787774;
+      --text-ter: #9b9a97;
+      --primary-btn-bg: #2f2e2c;
+      --primary-btn-text: #ffffff;
+      --sec-btn-bg: #f1f0ec;
+      --sec-btn-text: #37352f;
+      --radius: 12px;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+      --mono: ui-monospace, "SF Mono", Menlo, monospace;
     }}
     @media (prefers-color-scheme: dark) {{
       :root {{
-        --bg: #000000;
-        --card-bg: #1c1c1e;
-        --card-border: rgba(255, 255, 255, 0.08);
-        --text-main: #f5f5f7;
-        --text-sub: #aeaeb2;
-        --text-tertiary: #636366;
-        --tint: #0a84ff;
-        --tint-hover: #339aff;
-        --tint-light: rgba(10, 132, 255, 0.18);
-        --badge-bg: rgba(255, 255, 255, 0.12);
-        --badge-text: #e5e5ea;
-        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+        --bg: #181819;
+        --card-bg: #212123;
+        --border: #2e2e31;
+        --border-subtle: #272729;
+        --text: #ececed;
+        --text-sec: #9b9b9f;
+        --text-ter: #68686c;
+        --primary-btn-bg: #ececed;
+        --primary-btn-text: #181819;
+        --sec-btn-bg: #2c2c2f;
+        --sec-btn-text: #ececed;
       }}
     }}
     * {{ box-sizing: border-box; margin: 0; padding: 0; }}
     body {{
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      font-family: var(--font);
       background: var(--bg);
-      color: var(--text-main);
+      color: var(--text);
       line-height: 1.5;
-      padding: env(safe-area-inset-top, 24px) 16px env(safe-area-inset-bottom, 32px);
+      padding: env(safe-area-inset-top, 20px) 16px env(safe-area-inset-bottom, 28px);
+      -webkit-font-smoothing: antialiased;
     }}
     .container {{
-      max-width: 640px;
+      max-width: 520px;
       margin: 0 auto;
     }}
-    .nav-bar {{
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
+    .nav {{
+      margin-bottom: 12px;
     }}
-    .nav-back {{
+    .nav a {{
+      color: var(--text-sec);
+      text-decoration: none;
+      font-size: 0.86rem;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      color: var(--tint);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
+      gap: 3px;
     }}
-    .banner-wrap {{
-      width: 100%;
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--card-border);
-      background: var(--card-bg);
-    }}
-    .banner-img {{
-      width: 100%;
-      height: auto;
-      display: block;
-      aspect-ratio: 2.5 / 1;
-      object-fit: cover;
+    .nav a:hover {{
+      color: var(--text);
     }}
     .header-card {{
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-xl);
-      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 13px 14px;
       display: flex;
-      gap: 16px;
       align-items: center;
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 16px;
+      gap: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }}
     .pkg-icon {{
-      width: 68px;
-      height: 68px;
-      border-radius: 22.5%;
-      border: 1px solid var(--card-border);
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
       object-fit: cover;
-      flex-shrink: 0;
     }}
     .header-info {{
       flex: 1;
       min-width: 0;
     }}
-    .pkg-title {{
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin-bottom: 2px;
+    .pkg-name {{
+      font-size: 1.12rem;
+      font-weight: 650;
+      color: var(--text);
     }}
     .pkg-id {{
-      font-family: ui-monospace, "SF Mono", Menlo, monospace;
-      font-size: 0.78rem;
-      color: var(--text-tertiary);
-      margin-bottom: 6px;
-      word-break: break-all;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-ter);
+      margin-top: 1px;
     }}
-    .badge {{
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 0.74rem;
+    .btn-download {{
+      padding: 6px 13px;
+      font-size: 0.8rem;
       font-weight: 600;
-      background: var(--tint-light);
-      color: var(--tint);
-    }}
-    .actions-grid {{
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 16px;
-    }}
-    .btn {{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      padding: 10px 12px;
-      border-radius: var(--radius-md);
-      font-size: 0.86rem;
-      font-weight: 600;
+      color: var(--primary-btn-text);
+      background: var(--primary-btn-bg);
+      border-radius: 7px;
       text-decoration: none;
-      border: 1px solid transparent;
-      cursor: pointer;
       transition: opacity 0.15s;
     }}
-    .btn:active {{
-      opacity: 0.85;
+    .btn-download:hover {{
+      opacity: 0.88;
     }}
-    .btn-primary {{
-      background: var(--tint);
-      color: #fff;
-    }}
-    .btn-secondary {{
+    .card {{
       background: var(--card-bg);
-      color: var(--text-main);
-      border-color: var(--card-border);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }}
-    .section-card {{
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-xl);
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow-sm);
-    }}
-    .section-title {{
-      font-size: 0.85rem;
+    .card-title {{
+      font-size: 0.74rem;
       font-weight: 600;
+      color: var(--text-ter);
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--text-tertiary);
-      margin-bottom: 10px;
-    }}
-    .desc-content {{
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: var(--text-main);
-    }}
-    .desc-content p {{
       margin-bottom: 8px;
     }}
-    .desc-content p:last-child {{
-      margin-bottom: 0;
+    .desc p {{
+      font-size: 0.86rem;
+      color: var(--text);
+      line-height: 1.55;
     }}
-    .meta-table {{
+    .table {{
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.9rem;
+      font-size: 0.84rem;
     }}
-    .meta-table tr {{
-      border-bottom: 1px solid var(--card-border);
+    .table tr + tr {{
+      border-top: 1px solid var(--border-subtle);
     }}
-    .meta-table tr:last-child {{
-      border-bottom: none;
-    }}
-    .meta-table th {{
+    .table th {{
       text-align: left;
-      padding: 9px 0;
-      color: var(--text-sub);
+      padding: 7px 0;
+      color: var(--text-sec);
       font-weight: 400;
       width: 32%;
     }}
-    .meta-table td {{
-      padding: 9px 0;
-      color: var(--text-main);
+    .table td {{
+      padding: 7px 0;
+      color: var(--text);
       word-break: break-all;
     }}
-    .foot {{
+    .footer {{
       text-align: center;
-      font-size: 0.82rem;
-      color: var(--text-tertiary);
-      margin-top: 24px;
+      font-size: 0.74rem;
+      color: var(--text-ter);
+      margin-top: 16px;
     }}
-    .foot a {{
-      color: var(--tint);
-      text-decoration: none;
+    .footer code {{
+      font-family: var(--mono);
     }}
   </style>
 </head>
 <body>
   <div class="container">
-    <nav class="nav-bar">
-      <a class="nav-back" href="../index.html">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        返回源首页
-      </a>
-    </nav>
-
-    {banner_img_tag}
-
-    <header class="header-card">
-      <img class="pkg-icon" src="{icon_src}" alt="{html.escape(name)}">
-      <div class="header-info">
-        <h1 class="pkg-title">{html.escape(name)}</h1>
-        <div class="pkg-id">{html.escape(pkg_id)}</div>
-        <span class="badge">v{html.escape(version)}</span>
-        <span class="badge" style="background:var(--badge-bg);color:var(--badge-text)">{html.escape(arch)}</span>
-      </div>
-    </header>
-
-    <div class="actions-grid">
-      <a class="btn btn-primary" href="sileo://package/{html.escape(pkg_id)}">Sileo 查看</a>
-      <a class="btn btn-secondary" href="zbra://sources/add/{REPO_URL}/">Zebra 加源</a>
-      <a class="btn btn-secondary" href="{html.escape(deb_href)}" download>下载 deb</a>
+    <div class="nav">
+      <a href="../index.html">‹ 返回源首页</a>
     </div>
 
-    <section class="section-card">
-      <h2 class="section-title">简介</h2>
-      <div class="desc-content">
-        {desc_paragraphs}
+    <div class="header-card">
+      <img class="pkg-icon" src="{icon_src}" alt="">
+      <div class="header-info">
+        <h1 class="pkg-name">{html.escape(name)}</h1>
+        <div class="pkg-id">{html.escape(pkg_id)} · v{html.escape(version)}</div>
       </div>
-    </section>
+      <a class="btn-download" href="{html.escape(deb_href)}" download>下载</a>
+    </div>
 
-    <section class="section-card">
-      <h2 class="section-title">详细信息</h2>
-      <table class="meta-table">
+    <div class="card">
+      <div class="card-title">简介</div>
+      <div class="desc">{desc_paragraphs}</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">信息</div>
+      <table class="table">
         <tr><th>标识</th><td><code>{html.escape(pkg_id)}</code></td></tr>
         <tr><th>版本</th><td>{html.escape(version)}</td></tr>
         <tr><th>架构</th><td>{html.escape(arch)}</td></tr>
         <tr><th>分类</th><td>{html.escape(section)}</td></tr>
-        <tr><th>安装体积</th><td>{html.escape(inst_size)}</td></tr>
-        <tr><th>包大小</th><td>{size_str}</td></tr>
+        <tr><th>大小</th><td>{size_str}</td></tr>
         <tr><th>依赖</th><td>{html.escape(depends)}</td></tr>
         <tr><th>维护者</th><td>{html.escape(maintainer)}</td></tr>
-        <tr><th>作者</th><td>{html.escape(author)}</td></tr>
       </table>
-    </section>
+    </div>
 
-    <p class="foot">
-      来自 <a href="../index.html">{html.escape(REPO_TITLE)}</a> · 源地址 <code>{html.escape(REPO_URL)}</code>
-    </p>
+    <div class="footer">
+      paynexss's repo · <code>{html.escape(REPO_URL)}</code>
+    </div>
   </div>
 </body>
 </html>"""
@@ -948,24 +771,19 @@ def main():
     packages = parse_packages(os.path.join(root, "Packages"))
     print(f"[*] 读取 Packages 成功，共 {len(packages)} 个包")
 
-    # 1. 生成 index.html
-    index_html = generate_index_html(packages)
     with open(os.path.join(root, "index.html"), "w", encoding="utf-8") as f:
-        f.write(index_html)
+        f.write(generate_index_html(packages))
     print("  + 已更新 index.html")
 
-    # 2. 生成 depictions/<pkg>.html
     dep_dir = os.path.join(root, "depictions")
     os.makedirs(dep_dir, exist_ok=True)
     for p in packages:
         pkg_id = p.get("Package", "")
-        html_content = generate_depiction_html(p)
-        out_path = os.path.join(dep_dir, f"{pkg_id}.html")
-        with open(out_path, "w", encoding="utf-8") as f:
-            f.write(html_content)
+        with open(os.path.join(dep_dir, f"{pkg_id}.html"), "w", encoding="utf-8") as f:
+            f.write(generate_depiction_html(p))
         print(f"  + 已更新 depictions/{pkg_id}.html")
 
-    print("[✓] 页面美化生成完毕！")
+    print("[✓] 页面生成完毕！")
 
 
 if __name__ == "__main__":
