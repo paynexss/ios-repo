@@ -57,14 +57,8 @@ done
   --extra "$PWD/repo-extra.conf" \
   --face --pages --no-sign
 
-# repo-build.sh 跑完后：本源不签名 → 首页脚注里的 public.key 链接去掉
-python3 - "$REPO/index.html" <<'PY'
-import sys
-p = sys.argv[1]
-s = open(p, encoding="utf-8").read()
-s = s.replace(' ·\n<a href="public.key">public.key</a>', '')
-open(p, "w", encoding="utf-8").write(s)
-PY
+# 用现代原生风格重新生成首页与详情页（支持暗色/亮色、一键加源、一键复制、实时搜索）
+python3 "$REPO/build_pages.py"
 
 echo
 echo "下一步: git add -A && git commit -m '源更新' && git push"
