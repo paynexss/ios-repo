@@ -2,9 +2,9 @@
 
 给越狱设备（rootless / Dopamine，`/var/jb`）用的私有包集合，Sileo / Zebra 直接加源即可。
 
-**源地址**：`http://repo.paynexss.fun/`
+**源地址**：`https://repo.paynexss.fun/`
 
-> 网页版首页（含包列表，可复制源地址）：<http://repo.paynexss.fun/>
+> 网页版首页（含包列表，可复制源地址）：<https://repo.paynexss.fun/>
 
 ## 包含的包
 

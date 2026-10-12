@@ -8,7 +8,7 @@ build_pages.py —— 生成温润质感（Notion / Linear 暖灰风）的源首
 import html
 import os
 
-REPO_URL = "http://repo.paynexss.fun"
+REPO_URL = "https://repo.paynexss.fun"
 REPO_TITLE = "paynexss's repo"
 
 

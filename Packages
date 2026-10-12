@@ -7,9 +7,9 @@ Maintainer: Harlans
 Author: Harlans
 Section: Tweaks
 Depends: mobilesubstrate (>= 0.9.5000)
-SileoDepiction: http://repo.paynexss.fun/sileo/com.harans.tweak.shortcuttodebug.json
+SileoDepiction: https://repo.paynexss.fun/sileo/com.harans.tweak.shortcuttodebug.json
 Homepage: https://github.com/paynexss
-Icon: http://repo.paynexss.fun/icons/com.harans.tweak.shortcuttodebug.png
+Icon: https://repo.paynexss.fun/icons/com.harans.tweak.shortcuttodebug.png
 Tag: purpose::extension
 Installed-Size: 404
 Filename: ./debs/com.harans.tweak.shortcuttodebug_0.2.0-7+debug_iphoneos-arm64.deb
@@ -27,9 +27,9 @@ Maintainer: paynexc
 Author: paynexc
 Section: Tweaks
 Depends: firmware (>= 15.0)
-SileoDepiction: http://repo.paynexss.fun/sileo/com.paynexc.tweak.egernprounlock.json
+SileoDepiction: https://repo.paynexss.fun/sileo/com.paynexc.tweak.egernprounlock.json
 Homepage: https://github.com/paynexss
-Icon: http://repo.paynexss.fun/icons/com.paynexc.tweak.egernprounlock.png
+Icon: https://repo.paynexss.fun/icons/com.paynexc.tweak.egernprounlock.png
 Tag: purpose::extension
 Installed-Size: 1408
 Filename: ./debs/com.paynexc.tweak.egernprounlock_2.5.0_iphoneos-arm64.deb
@@ -47,9 +47,9 @@ Maintainer: paynexc
 Author: paynexc
 Section: Tweaks
 Depends: firmware (>= 15.0)
-SileoDepiction: http://repo.paynexss.fun/sileo/com.paynexc.tweak.rexprounlock.json
+SileoDepiction: https://repo.paynexss.fun/sileo/com.paynexc.tweak.rexprounlock.json
 Homepage: https://github.com/paynexss
-Icon: http://repo.paynexss.fun/icons/com.paynexc.tweak.rexprounlock.png
+Icon: https://repo.paynexss.fun/icons/com.paynexc.tweak.rexprounlock.png
 Tag: purpose::extension
 Installed-Size: 716
 Filename: ./debs/com.paynexc.tweak.rexprounlock_1.8.0_iphoneos-arm64.deb
@@ -67,9 +67,9 @@ Maintainer: paynexc
 Author: paynexc
 Section: Tweaks
 Depends: firmware (>= 15.0)
-SileoDepiction: http://repo.paynexss.fun/sileo/com.paynexc.tweak.sjjunlock.json
+SileoDepiction: https://repo.paynexss.fun/sileo/com.paynexc.tweak.sjjunlock.json
 Homepage: https://github.com/paynexss
-Icon: http://repo.paynexss.fun/icons/com.paynexc.tweak.sjjunlock.png
+Icon: https://repo.paynexss.fun/icons/com.paynexc.tweak.sjjunlock.png
 Tag: purpose::extension
 Installed-Size: 5020
 Filename: ./debs/com.paynexc.tweak.sjjunlock_1.2.0-1+debug_iphoneos-arm64.deb

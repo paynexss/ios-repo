@@ -9,13 +9,13 @@
 #            也可以直接把 .deb 丢进 debs/ 再跑（索引是扫全目录的）。
 #  删个包  : 删掉 debs/<包>.deb 再跑一次，本脚本会顺手清掉它残留的门面文件。
 #
-#  产物地址: http://repo.paynexss.fun/   ← 手机上加这个源
+#  产物地址: https://repo.paynexss.fun/   ← 手机上加这个源
 # ===========================================================================
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 REPO="$PWD"
-BASE_URL="http://repo.paynexss.fun"
+BASE_URL="https://repo.paynexss.fun"
 TOOLKIT="${IOS_TOOLKIT:-$HOME/Reverse/tools/ios-toolkit}"
 
 # 各包工程的产物（不存在就跳过，只看 debs/ 里已有的）

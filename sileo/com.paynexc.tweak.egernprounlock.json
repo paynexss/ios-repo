@@ -9,7 +9,7 @@
       "views": [
         {
           "class": "DepictionMarkdownView",
-          "markdown": "# EgernProUnlock\n\n解锁 Egern Pro（v2.5.0：自包含 hook 层，不再依赖 CydiaSubstrate/ellekit 的 MSHookFunction API，只需一个能注入 dylib 的环境）\n\n**版本** 2.5.0 ｜ **架构** iphoneos-arm64 ｜ **分类** Tweaks\n\n**依赖**：`firmware (>= 15.0)`\n\n---\n\n来自 paynexss's repo。源地址：`http://repo.paynexss.fun`"
+          "markdown": "# EgernProUnlock\n\n解锁 Egern Pro（v2.5.0：自包含 hook 层，不再依赖 CydiaSubstrate/ellekit 的 MSHookFunction API，只需一个能注入 dylib 的环境）\n\n**版本** 2.5.0 ｜ **架构** iphoneos-arm64 ｜ **分类** Tweaks\n\n**依赖**：`firmware (>= 15.0)`\n\n---\n\n来自 paynexss's repo。源地址：`https://repo.paynexss.fun`"
         },
         {
           "class": "DepictionSeparatorView"
@@ -62,5 +62,5 @@
       ]
     }
   ],
-  "headerImage": "http://repo.paynexss.fun/assets/banner-com.paynexc.tweak.egernprounlock.png"
+  "headerImage": "https://repo.paynexss.fun/assets/banner-com.paynexc.tweak.egernprounlock.png"
 }
