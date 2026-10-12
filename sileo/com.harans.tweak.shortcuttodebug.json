@@ -9,7 +9,7 @@
       "views": [
         {
           "class": "DepictionMarkdownView",
-          "markdown": "# Tap2DebugRootless\n\n无根越狱下通过 3D Touch 快捷方式打开设置中的“调试”页面\n\n**版本** 0.2.0-7+debug ｜ **架构** iphoneos-arm64 ｜ **分类** Tweaks\n\n**依赖**：`mobilesubstrate (>= 0.9.5000)`\n\n---\n\n来自 paynexss's repo。源地址：`https://paynexss.github.io/ios-repo`"
+          "markdown": "# Tap2DebugRootless\n\n无根越狱下通过 3D Touch 快捷方式打开设置中的“调试”页面\n\n**版本** 0.2.0-7+debug ｜ **架构** iphoneos-arm64 ｜ **分类** Tweaks\n\n**依赖**：`mobilesubstrate (>= 0.9.5000)`\n\n---\n\n来自 paynexss's repo。源地址：`http://repo.paynexss.fun`"
         },
         {
           "class": "DepictionSeparatorView"
@@ -62,5 +62,5 @@
       ]
     }
   ],
-  "headerImage": "https://paynexss.github.io/ios-repo/assets/banner-com.harans.tweak.shortcuttodebug.png"
+  "headerImage": "http://repo.paynexss.fun/assets/banner-com.harans.tweak.shortcuttodebug.png"
 }

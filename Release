@@ -6,16 +6,16 @@ Codename: ios
 Architectures: iphoneos-arm64
 Components: main
 Description: paynexss's repo
-Date: Fri, 02 Oct 2026 19:16:56 +0000
+Date: Mon, 12 Oct 2026 02:04:55 +0000
 MD5Sum:
- 78adc01569d755483b98905346213bc1     4808 Packages
- af36fdefa68885f7cb49e868c1734cee     1813 Packages.gz
- ee94844b3ca27e7f44f35660029d0349     1933 Packages.bz2
+ c12c91a368072284eff86eaea7033e6f     3272 Packages
+ c788cb5d3e767f5189935678d68f258d     1393 Packages.gz
+ d3e4abe05641e16eca33fedf9893773f     1500 Packages.bz2
 SHA1:
- 2db18dcc6155898a3ad9d49792b08526ed106384     4808 Packages
- a734d25c3b7713e66dd0eaecd59f69581f282ed9     1813 Packages.gz
- 479a4082b34be64069ff9b342e0dd73fd17be94b     1933 Packages.bz2
+ 838bc06056a3355efa145ccc468697342f96fdf1     3272 Packages
+ 178dfb7d61a40b684131ce26c4757f39b8258048     1393 Packages.gz
+ 3c7d0b32df6d76fbb02bb5ccd3801a7497f5d9bd     1500 Packages.bz2
 SHA256:
- 05c437e97ae69a62ebfa09dbcbf01849d01df9dc50e025ea4c71a26ef2c52496     4808 Packages
- b4e5a450d935fd016c21409158cef329d36f7392bfc1f39ad93c6d689ba877fa     1813 Packages.gz
- 644abae97270d4e561d566dc80041a8f7a0bf20d4ed89f86e57c5794b88e8e26     1933 Packages.bz2
+ cbafe390e1c2369f4a9f5565861f01e5666fa3732fc7b3d0cc640233019bdd8f     3272 Packages
+ 79af89e487043b922e040ba64d1a4d10934f3abd18e8167aab55f531dc937989     1393 Packages.gz
+ 2ec046635ed5a52c602c46d68d5b45fe765858ada72b414d0dc2fb904a4a8498     1500 Packages.bz2

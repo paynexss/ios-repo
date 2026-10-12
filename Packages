@@ -7,9 +7,9 @@ Maintainer: Harlans
 Author: Harlans
 Section: Tweaks
 Depends: mobilesubstrate (>= 0.9.5000)
-SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.harans.tweak.shortcuttodebug.json
+SileoDepiction: http://repo.paynexss.fun/sileo/com.harans.tweak.shortcuttodebug.json
 Homepage: https://github.com/paynexss
-Icon: https://paynexss.github.io/ios-repo/icons/com.harans.tweak.shortcuttodebug.png
+Icon: http://repo.paynexss.fun/icons/com.harans.tweak.shortcuttodebug.png
 Tag: purpose::extension
 Installed-Size: 404
 Filename: ./debs/com.harans.tweak.shortcuttodebug_0.2.0-7+debug_iphoneos-arm64.deb
@@ -17,46 +17,6 @@ Size: 29406
 MD5sum: e4c6b4bce08867b2664fb4fda7dc189d
 SHA1: 15a6adb6392b59b82e5349435094319b980a2992
 SHA256: 6f80913b0c43530c41b6ede52b84951584ef2ab39eb7a4fba305092c82096de6
-
-Package: com.paynexc.appdecrypt
-Name: appdecrypt
-Version: 1.0.0
-Architecture: iphoneos-arm64
-Description: 设备端砸壳 CLI（task_for_pid + 内存解密，无需 frida）
-Maintainer: paynexc
-Author: paynexc
-Section: Utilities
-Depends: firmware (>= 15.0)
-SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.paynexc.appdecrypt.json
-Homepage: https://github.com/paynexss
-Icon: https://paynexss.github.io/ios-repo/icons/com.paynexc.appdecrypt.png
-Tag: role::hacker
-Installed-Size: 1324
-Filename: ./debs/com.paynexc.appdecrypt_1.0.0_iphoneos-arm64.deb
-Size: 348382
-MD5sum: 77af1b17beab45a75ced201425a19964
-SHA1: e3c3bb5ceb8f7cd02d90d939340ffefdd90ad7e9
-SHA256: b637bde4dd812375a7156e809813acfa58def54e221cc64bae0b06854f618923
-
-Package: com.paynexc.repo-key
-Name: 源签名公钥
-Version: 1.0.0
-Architecture: iphoneos-arm64
-Description: 自建源（GitHub Pages）的 APT 签名公钥
-Maintainer: paynexc
-Author: paynexc
-Section: Packaging
-Depends: firmware (>= 15.0)
-SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.paynexc.repo-key.json
-Homepage: https://github.com/paynexss
-Icon: https://paynexss.github.io/ios-repo/icons/com.paynexc.repo-key.png
-Tag: purpose::extension
-Installed-Size: 0
-Filename: ./debs/com.paynexc.repo-key_1.0.0_iphoneos-arm64.deb
-Size: 3750
-MD5sum: a133f5948cf46c309d53458754118e18
-SHA1: ec85f16ba6b283001144a4485dc88db2bb27b7c3
-SHA256: 40c175feb6bc81d4666dc188207bbde3927cf8a204f5597c1e483493d754c5ac
 
 Package: com.paynexc.tweak.egernprounlock
 Name: EgernProUnlock
@@ -67,9 +27,9 @@ Maintainer: paynexc
 Author: paynexc
 Section: Tweaks
 Depends: firmware (>= 15.0)
-SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.paynexc.tweak.egernprounlock.json
+SileoDepiction: http://repo.paynexss.fun/sileo/com.paynexc.tweak.egernprounlock.json
 Homepage: https://github.com/paynexss
-Icon: https://paynexss.github.io/ios-repo/icons/com.paynexc.tweak.egernprounlock.png
+Icon: http://repo.paynexss.fun/icons/com.paynexc.tweak.egernprounlock.png
 Tag: purpose::extension
 Installed-Size: 1408
 Filename: ./debs/com.paynexc.tweak.egernprounlock_2.5.0_iphoneos-arm64.deb
@@ -87,9 +47,9 @@ Maintainer: paynexc
 Author: paynexc
 Section: Tweaks
 Depends: firmware (>= 15.0)
-SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.paynexc.tweak.rexprounlock.json
+SileoDepiction: http://repo.paynexss.fun/sileo/com.paynexc.tweak.rexprounlock.json
 Homepage: https://github.com/paynexss
-Icon: https://paynexss.github.io/ios-repo/icons/com.paynexc.tweak.rexprounlock.png
+Icon: http://repo.paynexss.fun/icons/com.paynexc.tweak.rexprounlock.png
 Tag: purpose::extension
 Installed-Size: 716
 Filename: ./debs/com.paynexc.tweak.rexprounlock_1.8.0_iphoneos-arm64.deb
@@ -107,9 +67,9 @@ Maintainer: paynexc
 Author: paynexc
 Section: Tweaks
 Depends: firmware (>= 15.0)
-SileoDepiction: https://paynexss.github.io/ios-repo/sileo/com.paynexc.tweak.sjjunlock.json
+SileoDepiction: http://repo.paynexss.fun/sileo/com.paynexc.tweak.sjjunlock.json
 Homepage: https://github.com/paynexss
-Icon: https://paynexss.github.io/ios-repo/icons/com.paynexc.tweak.sjjunlock.png
+Icon: http://repo.paynexss.fun/icons/com.paynexc.tweak.sjjunlock.png
 Tag: purpose::extension
 Installed-Size: 5020
 Filename: ./debs/com.paynexc.tweak.sjjunlock_1.2.0-1+debug_iphoneos-arm64.deb

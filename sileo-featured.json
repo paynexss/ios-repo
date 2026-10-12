@@ -13,34 +13,26 @@
           "type": "carousel",
           "screenshots": [
             {
-              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.harans.tweak.shortcuttodebug.png",
+              "url": "http://repo.paynexss.fun/assets/banner-com.harans.tweak.shortcuttodebug.png",
               "accessibilityText": "Tap2DebugRootless"
             },
             {
-              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.appdecrypt.png",
-              "accessibilityText": "appdecrypt"
-            },
-            {
-              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.repo-key.png",
-              "accessibilityText": "源签名公钥"
-            },
-            {
-              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.tweak.egernprounlock.png",
+              "url": "http://repo.paynexss.fun/assets/banner-com.paynexc.tweak.egernprounlock.png",
               "accessibilityText": "EgernProUnlock"
             },
             {
-              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.tweak.rexprounlock.png",
+              "url": "http://repo.paynexss.fun/assets/banner-com.paynexc.tweak.rexprounlock.png",
               "accessibilityText": "RexProUnlock"
             },
             {
-              "url": "https://paynexss.github.io/ios-repo/assets/banner-com.paynexc.tweak.sjjunlock.png",
+              "url": "http://repo.paynexss.fun/assets/banner-com.paynexc.tweak.sjjunlock.png",
               "accessibilityText": "SJJUnlock"
             }
           ]
         },
         {
           "class": "DepictionMarkdownView",
-          "markdown": "## paynexss's repo\n\n共 6 个包"
+          "markdown": "## paynexss's repo\n\n共 4 个包"
         }
       ]
     }
